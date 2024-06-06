@@ -40,12 +40,18 @@ class MadurityLevelController extends Controller
         //
         $validateData = $request->validate([
             'name' => "required|unique:madurity_level|max:255",
-            'description' => "required|max:255"
+            'description' => "required|max:255",
+            'visible_name' => "required"   ,
+            'min_range' => "required"       ,
+            'max_range' => "required",    
         ]);
 
         $madurityLevel = new MadurityLevel;
         $madurityLevel->name = $request->name;
         $madurityLevel->description = $request->description;
+        $madurityLevel->visible_name = $request->visible_name;
+        $madurityLevel->min_range = $request->min_range;
+        $madurityLevel->max_range = $request->max_range;
         $madurityLevel->save();
         
         return redirect()->route('madurityLevel.index')->with('success', 'Nivel de madurez creado correctamente');
@@ -75,13 +81,19 @@ class MadurityLevelController extends Controller
         //
         $validateData = $request->validate([
             'name'=>'required|max:255|unique:madurity_level,name,' .$id,     
-            'description' => "required|max:255"       
+            'description' => "required|max:255"   ,
+            'visible_name' => "required"   ,
+            'min_range' => "required"       ,
+            'max_range' => "required",    
         ], [
             'name.required' => "El nombre es requerido",
             'name.unique'   => "Ya existe un nivel con este nombre"]);    
         $madurityLevel = MadurityLevel::find($id);
         $madurityLevel->name = $request->name;
         $madurityLevel->description = $request->description;
+        $madurityLevel->visible_name = $request->visible_name;
+        $madurityLevel->min_range = $request->min_range;
+        $madurityLevel->max_range = $request->max_range;
         $madurityLevel->save();
         return redirect()->route('madurityLevel.index')->with('success', 'Nivel de madurez actualizado correctamente');
     }

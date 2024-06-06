@@ -15,7 +15,11 @@ class CreateDimensionTable extends Migration {
             $table->id();
             $table->string('name');
             $table->integer('status')->default(1);
+            $table->double('min_range');
+            $table->double('max_range');
             $table->longText('description');
+            $table->unsignedBigInteger('factor_id');
+            $table->foreign('factor_id')->references('id')->on('factor');
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\From;
+use App\Models\Answer;
 
 class Question extends Model {
     use HasFactory;
@@ -23,5 +24,20 @@ class Question extends Model {
      */
     public function form() {
         return $this->belongsTo('App\Models\Form', 'form_id');
+    }
+
+    public function answers() {
+        return $this->hasMany(Answer::class);
+    }
+
+    public function cantidadRespuestas()
+    {
+        return $this->answers()->count();
+    }
+
+    public function howManyAnswers($question) {
+        $pregunta = Question::findOrFail($question);
+        $cantidadRespuestas = $pregunta->cantidadRespuestas();
+        return $cantidadRespuestas;
     }
 }

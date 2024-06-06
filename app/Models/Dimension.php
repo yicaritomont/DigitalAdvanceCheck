@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Factor;
 
 class Dimension extends Model {
     use HasFactory;
@@ -13,6 +14,16 @@ class Dimension extends Model {
         'id',
         'name',
         'status',
+        'min_range',
+        'max_range',
+        'description',
+        'factor_id',
     ];
     public $timestamps = true;
+    /**
+     * Include the relation whit model dimension.
+     */
+    public function factor() {
+        return $this->belongsTo('App\Models\Factor', 'factor_id');
+    }
 }

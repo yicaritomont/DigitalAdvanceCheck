@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('content')
-@if (session('message'))
-    <div class="alert alert-{{session('alert')}}" role="alert">
-        {{ session('message') }}
+@if (session('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
     </div>
 @endif
 <!--begin::Card-->

@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('content')
-@if (session('message'))
-    <div class="alert alert-{{session('alert')}}" role="alert">
-        {{ session('message') }}
+@if (session('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
     </div>
 @endif
 <!--begin::Card-->
@@ -36,6 +36,8 @@
         <tr>                        
             <th>ID</th>
             <th>Nombre</th>
+            <th>Evangelizado</th>
+            <th>Rango</th>
             <th>Estado</th>
             <th>Acciones</th>
         </tr>
@@ -45,6 +47,8 @@
                     <tr>
                         <td>{{$level->id}}</td>
                         <td>{{$level->name}}</td>
+                        <td>{{$level->visible_name}}</td>
+                        <td>{{$level->min_range}} - {{$level->max_range}} Pntos</td>
                         <td>
                         <form action="{{ route('madurityLevel.updateStatus', $level->id) }}" method="POST">   
                             @csrf

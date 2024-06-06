@@ -7,7 +7,12 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\MadurityLevelController;
+use App\Http\Controllers\FactorController;
 use App\Http\Controllers\DimensionsController;
+use App\Http\Controllers\DimensionScoreController;
+use App\Http\Controllers\FormsController;
+use App\Http\Controllers\QuestionsController;
+use App\Http\Controllers\AnswerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,7 +52,28 @@ Route::group( ['middleware' => ['auth']], function() {
     Route::resource('madurityLevel', MadurityLevelController::class);
     Route::put('/madurityLevel/{id}/update-status', [App\Http\Controllers\MadurityLevelController::class, 'UpdateStatus'])->name('madurityLevel.updateStatus');
 
+    Route::resource('factor', FactorController::class);
+    Route::put('/factor/{id}/update-status', [App\Http\Controllers\FactorController::class, 'UpdateStatus'])->name('factor.updateStatus');
+    
     Route::resource('dimension', DimensionsController::class);
     Route::put('/dimension/{id}/update-status', [App\Http\Controllers\DimensionsController::class, 'UpdateStatus'])->name('dimension.updateStatus');
+
+    Route::resource('dimensionScore', DimensionScoreController::class);
+
+    Route::resource('form', FormsController::class);
+    Route::put('/form/{id}/update-status', [App\Http\Controllers\FormsController::class, 'UpdateStatus'])->name('form.updateStatus');
+
+    Route::resource('question', QuestionsController::class);
+    Route::put('/questions/{id}/update-status', [App\Http\Controllers\QuestionsController::class, 'UpdateStatus'])->name('question.updateStatus');
     
+    Route::get('/answer/{question_id}/add', [App\Http\Controllers\AnswerController::class, 'create'])->name('answer.addAnswer');
+    Route::get('/answer/{question_id}/edit', [App\Http\Controllers\AnswerController::class, 'edit'])->name('answer.edit');
+    Route::put('/answer/{question_id}/update', [App\Http\Controllers\AnswerController::class, 'update'])->name('answer.update');
+    Route::get('/answer/{question_id}/list', [App\Http\Controllers\AnswerController::class, 'list'])->name('answer.listAnswer');
+    Route::post('/answer/store', [App\Http\Controllers\AnswerController::class, 'store'])->name('answer.store');
+    Route::put('/answer/{id}/update-status', [App\Http\Controllers\AnswerController::class, 'UpdateStatus'])->name('answer.updateStatus');
+
+    // RUTAS PARA MEDICIÓN
+    
+
 });

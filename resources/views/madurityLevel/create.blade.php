@@ -28,6 +28,36 @@
 						
 					</div>
 					<div class="form-group">
+						{{ Form::label('nombre', 'Evangelizado') }}
+                        {{ Form::text('visible_name', $madurityLevel->visible_name, ['class' => 'form-control form-control-solid', 'placeholder' => 'Nombre del nivel de madurez']) }}
+                        @if($errors->has('visible_name'))
+						<div class="alert alert-danger">
+							{{ $errors->first('visible_name') }}
+						</div>	
+                        @endif	
+						
+					</div>
+					<div class="form-group">
+						{{ Form::label('min_range', 'Rango mínimo') }}
+                        {{ Form::text('min_range', $madurityLevel->min_range, ['class' => 'form-control form-control-solid', 'placeholder' => '_Rango mínimo']) }}
+                        @if($errors->has('nombre'))
+						<div class="alert alert-danger">
+							{{ $errors->first('min_range') }}
+						</div>	
+                        @endif	
+						
+					</div>
+					<div class="form-group">
+						{{ Form::label('max_range', 'Rango Máximo') }}
+                        {{ Form::text('max_range', $madurityLevel->max_range, ['class' => 'form-control form-control-solid', 'placeholder' => '_Rango Máximo']) }}
+                        @if($errors->has('nombre'))
+						<div class="alert alert-danger">
+							{{ $errors->first('max_range') }}
+						</div>	
+                        @endif	
+						
+					</div>
+					<div class="form-group">
 						{{ Form::label('description', 'Descripción') }}
                         {{ Form::textarea('description', $madurityLevel->description, ['class' => 'form-control form-control-solid', 'placeholder' => 'Descripción del nivel de madurez']) }}
 						@if($errors->has('description'))

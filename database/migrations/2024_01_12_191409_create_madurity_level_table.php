@@ -15,6 +15,9 @@ class CreateMadurityLevelTable extends Migration {
             $table->id();
             $table->string('name');
             $table->integer('status')->default(1);
+            $table->string('visible_name');
+            $table->integer('min_range');
+            $table->integer('max_range');
             $table->longText('description');
             $table->timestamps();
         });

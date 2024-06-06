@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dimension;
+use App\Models\Factor;
 use Illuminate\Http\Request;
 
 class DimensionsController extends Controller
@@ -26,7 +27,8 @@ class DimensionsController extends Controller
     public function create()
     {
         $dimension = new Dimension;
-        return view("dimension.create", compact("dimension"));
+        $factor = Factor::pluck('name', 'id');
+        return view("dimension.create", compact("dimension", "factor"));
     }
 
     /**
@@ -40,12 +42,16 @@ class DimensionsController extends Controller
         //
         $validateData = $request->validate([
             'name' => "required|unique:dimension|max:255",
-            'description' => "required|max:255"
+            'description' => "required|max:255",
+            'min_range' => "required"       ,
+            'max_range' => "required",
         ]);
 
         $dimension = new Dimension;
         $dimension->name = $request->name;
         $dimension->description = $request->description;
+        $dimension->min_range = $request->min_range;
+        $dimension->max_range = $request->max_range;       
         $dimension->save();
         
         return redirect()->route('dimension.index')->with('success', 'Dimensión creada correctamente');
@@ -60,7 +66,8 @@ class DimensionsController extends Controller
     public function edit($id)
     {
         $dimension = Dimension::find($id);
-        return view('dimension.edit',compact('dimension'));
+        $factor = Factor::pluck('name', 'id');
+        return view('dimension.edit',compact('dimension', 'factor'));
     }
 
     /**
@@ -75,13 +82,17 @@ class DimensionsController extends Controller
         //
         $validateData = $request->validate([
             'name'=>'required|max:255|unique:dimension,name,' .$id,     
-            'description' => "required|max:255"       
+            'description' => "required|max:255",
+            'min_range' => "required"       ,
+            'max_range' => "required",
         ], [
             'name.required' => "El nombre es requerido",
             'name.unique'   => "Ya existe una dimensión con este nombre"]);    
         $dimension = Dimension::find($id);
         $dimension->name = $request->name;
         $dimension->description = $request->description;
+        $dimension->min_range = $request->min_range;
+        $dimension->max_range = $request->max_range;        
         $dimension->save();
         return redirect()->route('dimension.index')->with('success', 'Dimensión actualizada correctamente');
     }

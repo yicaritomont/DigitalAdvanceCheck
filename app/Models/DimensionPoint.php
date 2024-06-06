@@ -38,4 +38,37 @@ class DimensionPoint extends Model {
     public function madurityLevel() {
         return $this->belongsTo('App\Models\MadurityLevel', 'madurity_level_id');
     }
+
+    public function progressitemDimension($item){
+
+        $howlong = strlen($item);
+        switch (true) {
+            case  ($howlong <= 100):
+                $porcent = 25;
+                $style = "bg-danger";
+            break;
+            case  ($howlong > 100 && $howlong <= 200):
+                $porcent = 50;
+                $style = "bg-warning";
+            break;
+            case  ($howlong > 200 && $howlong <= 300):
+                $porcent = 90;
+                $style = "bg-info";
+            break;
+            case  ($howlong > 300 ):
+                $porcent = 100;
+                $style = "bg-success";
+            break;
+            default:
+              $porcent = 0;
+              $style = "";
+          }
+
+        return '<div class="col-4">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped '.$style.'" role="progressbar" style="width: '.$porcent.'%" aria-valuenow="'.$porcent.'" aria-valuemin="0" aria-valuemax="100" alt="le le le "></div>
+            </div>
+        </div>';
+        
+    }
 }

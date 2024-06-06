@@ -28,6 +28,36 @@
 						
 					</div>
 					<div class="form-group">
+						{{ Form::label('min_range', 'Rango mínimo') }}
+                        {{ Form::text('min_range', $dimension->min_range, ['class' => 'form-control form-control-solid', 'placeholder' => '_Rango mínimo']) }}
+                        @if($errors->has('nombre'))
+						<div class="alert alert-danger">
+							{{ $errors->first('min_range') }}
+						</div>	
+                        @endif	
+						
+					</div>
+					<div class="form-group">
+						{{ Form::label('max_range', 'Rango Máximo') }}
+                        {{ Form::text('max_range', $dimension->max_range, ['class' => 'form-control form-control-solid', 'placeholder' => '_Rango Máximo']) }}
+                        @if($errors->has('nombre'))
+						<div class="alert alert-danger">
+							{{ $errors->first('max_range') }}
+						</div>	
+                        @endif	
+						
+					</div>
+					<div class="form-group">
+						{{ Form::label('factor', 'Factor') }}
+						{{ Form::select('factor', $factor, null , ['class' => '']) }}
+                        @if($errors->has('factor'))
+						<div class="alert alert-danger">
+							{{ $errors->first('factor') }}
+						</div>	
+                        @endif	
+						
+					</div>
+					<div class="form-group">
 						{{ Form::label('description', 'Descripción') }}
                         {{ Form::textarea('description', $dimension->description, ['class' => 'form-control form-control-solid', 'placeholder' => 'Descripción del nivel de madurez']) }}
 						@if($errors->has('description'))

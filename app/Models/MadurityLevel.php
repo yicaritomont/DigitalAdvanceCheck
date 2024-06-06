@@ -13,6 +13,10 @@ class MadurityLevel extends Model {
         'id',
         'name',
         'status',
+        'visible_name',
+        'min_range',
+        'max_range',
+        'description',
     ];
     public $timestamps = true;
 

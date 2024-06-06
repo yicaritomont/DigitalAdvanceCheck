@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('content')
-@if (session('message'))
-    <div class="alert alert-{{session('alert')}}" role="alert">
-        {{ session('message') }}
+@if (session('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
     </div>
 @endif
 <!--begin::Card-->
@@ -36,6 +36,8 @@
         <tr>                        
             <th>ID</th>
             <th>Nombre</th>
+            <th>Factor</th>
+            <th>Rango</th>
             <th>Estado</th>
             <th>Acciones</th>
         </tr>
@@ -45,6 +47,8 @@
                     <tr>
                         <td>{{$dimens->id}}</td>
                         <td>{{$dimens->name}}</td>
+                        <td>{{$dimens->factor->name}}</td>
+                        <td>{{$dimens->min_range}} - {{$dimens->max_range}}</td>
                         <td>
                         <form action="{{ route('dimension.updateStatus', $dimens->id) }}" method="POST">   
                             @csrf
