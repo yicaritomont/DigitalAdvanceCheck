@@ -18,6 +18,7 @@ class CreateDimensionTable extends Migration {
             $table->double('min_range');
             $table->double('max_range');
             $table->longText('description');
+            $table->longText('additional_info');
             $table->unsignedBigInteger('factor_id');
             $table->foreign('factor_id')->references('id')->on('factor');
             $table->timestamps();

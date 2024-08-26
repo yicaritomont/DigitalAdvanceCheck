@@ -20,8 +20,6 @@ class CreateDimensionPointTable extends Migration {
             $table->longtext('best_practice');
             $table->longtext('congrats');
             $table->longtext('conclusions');
-            $table->unsignedBigInteger('dimension_id');
-            $table->foreign('dimension_id')->references('id')->on('dimension');
             $table->unsignedBigInteger('madurity_level_id');
             $table->foreign('madurity_level_id')->references('id')->on('madurity_level');
             $table->timestamps();

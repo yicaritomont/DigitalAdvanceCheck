@@ -52,7 +52,6 @@ class DimensionScoreController extends Controller
             'best_practice' => "required",
             'congrats' => "required",
             'conclusions' => "required",
-            'dimension_id' => "required",
             'madurity_level_id' => "required",
         ]);
 
@@ -64,7 +63,6 @@ class DimensionScoreController extends Controller
         $dimensionScore->best_practice = $request-> best_practice;
         $dimensionScore->congrats = $request->congrats;
         $dimensionScore->conclusions = $request->conclusions;
-        $dimensionScore->dimension_id = $request->dimension_id;
         $dimensionScore->madurity_level_id = $request->madurity_level_id;     
         $dimensionScore->save();
         
@@ -102,7 +100,6 @@ class DimensionScoreController extends Controller
             'best_practice' => "required",
             'congrats' => "required",
             'conclusions' => "required",
-            'dimension_id' => "required",
             'madurity_level_id' => "required",
         ]);
 
@@ -114,7 +111,6 @@ class DimensionScoreController extends Controller
         $dimensionScore->best_practice = $request-> best_practice;
         $dimensionScore->congrats = $request->congrats;
         $dimensionScore->conclusions = $request->conclusions;
-        $dimensionScore->dimension_id = $request->dimension_id;
         $dimensionScore->madurity_level_id = $request->madurity_level_id;    
         $dimensionScore->save();
         

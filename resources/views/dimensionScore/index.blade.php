@@ -35,7 +35,6 @@
     <thead>
         <tr>                        
             <th>ID</th>
-            <th>Dimensión</th>
             <th>Nivel</th>
             <th>Rango</th>
             <th>Categorías</th>
@@ -46,7 +45,6 @@
                 @foreach($dimensionScore as $dimens)
                     <tr>
                         <td>{{$dimens->id}}</td>
-                        <td>{{$dimens->dimension->name}}</td>
                         <td>{{$dimens->madurityLevel->name}}</td>
                         <td>{{$dimens->min_score}} - {{$dimens->max_score}}</td>
                         <td>

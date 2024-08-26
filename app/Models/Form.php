@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Dimension;
+use App\Models\Question;
+
 
 class Form extends Model {
     use HasFactory;
@@ -24,5 +26,11 @@ class Form extends Model {
      */
     public function dimension() {
         return $this->belongsTo('App\Models\Dimension', 'dimension_id');
+    }
+    /**
+     * Include the 
+     */
+    public function preguntas() {
+        return $this->hasMany(Question::class);
     }
 }

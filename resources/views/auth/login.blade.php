@@ -14,7 +14,7 @@
                     @csrf
                     <div class="form-group center">                       
                         <div class="input-group">
-                            <img src="{{url('assets/images/logo.png')}}"></img>
+                            <img src="{{url('assets/images/logo_2.jpg')}}"></img>
                         </div><br><br>
                     </div>
                     <div class="form-group">

@@ -84,10 +84,22 @@
       <div class="collapse {{ show_class(['user-pages/*']) }}" id="reports">
         <ul class="nav flex-column sub-menu">
          <li class="nav-item {{ active_class(['user-pages/login']) }}">
-            <a class="nav-link" href="">Busqueda reporte por usuario</a>
+            <a class="nav-link" href="{{ route('completedMedition')}}">Reporte mediciones Completas</a>
           </li>
-          <li class="nav-item {{ active_class(['user-pages/login']) }}">
-            <a class="nav-link" href="#">Generales</a>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item {{ active_class(['user-pages/*']) }}">
+      <a class="nav-link" data-toggle="collapse" href="#users" aria-expanded="{{ is_active_route(['reports/*']) }}" aria-controls="reports">
+      <i class="menu-icon mdi mdi-account"></i>
+        <span class="menu-title">Usuarios</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse {{ show_class(['user-pages/*']) }}" id="users">
+        <ul class="nav flex-column sub-menu">
+         <li class="nav-item {{ active_class(['user-pages/login']) }}">
+            <a class="nav-link" href="{{ route('users.index')}}">Listado de usuarios</a>
           </li>
         </ul>
       </div>
@@ -111,7 +123,7 @@
       <div class="collapse {{ show_class(['user-pages/*']) }}" id="user-pages">
         <ul class="nav flex-column sub-menu">
          <li class="nav-item {{ active_class(['user-pages/login']) }}">
-            <a class="nav-link" href="">Medición</a>
+            <a class="nav-link" href="{{ url('/dashBoardUser') }}">Medición</a>
           </li>
         </ul>
       </div>

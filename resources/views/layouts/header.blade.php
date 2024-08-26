@@ -1,9 +1,9 @@
 <nav class="navbar navbar-menu-dark default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
     <a class="navbar-brand brand-logo" href="{{ url('/') }}">
-      <img src="{{ url('assets/images/logo.png') }}" alt="logo" /> </a>
+      <img src="{{ url('assets/images/logo_2.jpg') }}" alt="logo" /> </a>
     <a class="navbar-brand brand-logo-mini" href="{{ url('/') }}">
-      <img src="{{ url('assets/images/logo.png') }}" alt="logo" /> </a>
+      <img src="{{ url('assets/images/logo_2.jpg') }}" alt="logo" /> </a>
   </div>
   <div class="navbar-menu-wrapper navbar-menu-dark d-flex align-items-center justify-content-end">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -11,12 +11,8 @@
     </button>
     <ul class="navbar-nav navbar-nav-left header-links">
       <li class="nav-item active d-none d-lg-flex">
-        <a href="#" class="nav-link">
+        <a href="{{ url('home') }}" class="nav-link">
           <i class="mdi mdi-elevation-rise"></i>Reportes</a>
-      </li>
-      <li class="nav-item d-none d-md-flex">
-        <a href="#" class="nav-link">
-          <i class="mdi mdi-bookmark-plus-outline"></i>Puntajes</a>
       </li>
     </ul>
 

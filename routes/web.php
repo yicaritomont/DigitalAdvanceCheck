@@ -13,6 +13,9 @@ use App\Http\Controllers\DimensionScoreController;
 use App\Http\Controllers\FormsController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\ConstructFormController;
+use App\Http\Controllers\Auth\RemindersController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,8 +34,8 @@ Route::get('/', function () {
 // RUTAS DE REGISTRO
 Auth::routes();
 Route::get('/register/verify/{code}', 'Auth\RegisterController@verify');
-Route::resource('reminder', 'RemindersController');
-Route::get('reminder',['as'=>'reminder','uses' => 'RemindersController@getRemind']);
+Route::resource('reminder', RemindersController::class);
+Route::get('reminder',[RemindersController::class, 'getRemind'])->name('reminder');
 Route::post('postRemind',['as'=>'postRemind','uses' => 'RemindersController@postRemind']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -74,6 +77,17 @@ Route::group( ['middleware' => ['auth']], function() {
     Route::put('/answer/{id}/update-status', [App\Http\Controllers\AnswerController::class, 'UpdateStatus'])->name('answer.updateStatus');
 
     // RUTAS PARA MEDICIÓN
-    
+    Route::resource('startForm', ConstructFormController::class);
+    Route::get("showResults", [App\Http\Controllers\ConstructFormController::class, 'showResults'])->name('showResults');
+    Route::get("showRecomendations", [App\Http\Controllers\ConstructFormController::class, 'showRecomendations'])->name('showRecomendations');
+
+    // Ruta para Resumen
+    Route::get("showResume/{attemp_id}", [App\Http\Controllers\ConstructFormController::class, 'showResume'])->name('showResume');
+
+    // Rutas para Reportes
+    Route::get("completedMedition",[App\Http\Controllers\ReportsController::class, 'completedMedition'])->name('completedMedition');
+
+    Route::resource('users', UserController::class);
+
 
 });

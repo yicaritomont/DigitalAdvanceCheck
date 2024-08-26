@@ -23,11 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->role_id == 1) {
-            return view('dashboard.dashboardAdmin');
+        
+        if(Auth::user()->rol_id == 1) {
+            return redirect('dashBoardAdmin');
         }
         else {
-            return view ('dashboard.dashboardUser');
+            return redirect('dashBoardUser');
         }
     }
 }

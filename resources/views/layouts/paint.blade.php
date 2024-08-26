@@ -34,9 +34,8 @@
 <body data-base-url="{{url('/')}}">
 
   <div class="container-scroller" id="app">
-    @include('layouts.header')
     <div class="container-fluid page-body-wrapper">
-      @include('layouts.sidebar')
+     
       <div class="main-panel">
         <div class="content-wrapper">
           @yield('content')

@@ -4,9 +4,11 @@
   <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
     
     <div class="container">
-      <a class="navbar-brand" href="{{ url('/') }}"><h3>MDM</h3> <p class="text-white">Medición de madurez digital</p></a>
+      <a class="navbar-brand brand-logo" href="{{ url('/') }}"><br>
+      <img class="img-logo" src="{{ url('assets/images/logo_2.jpg') }}" alt="logo" /> </a>
     </div>
     <ul class="navbar-nav navbar-nav-left header-links">
+      @guest
         @if(Route::currentRouteName() != "login")
         <li class="nav-item d-none d-xl-flex">
             <a href="{{ url('login') }}" class="btn btn-dark btn-rounded btn-fw btn-index">Iniciar Sesión</a>
@@ -18,7 +20,9 @@
             <a href="{{ url('register') }}" class="btn btn-dark btn-rounded btn-fw btn-index">Registrarse</a>
         </li>
         @endif
-        <li class="nav-item d-none d-lg-flex"> &nbsp;&nbsp;&nbsp;</li>
+      @else
+        <li class="nav-item d-none d-lg-flex"> <a href="{{ url('home') }}" class="btn btn-dark btn-rounded btn-fw btn-index">Ir al sitio</a></li>
+      @endguest
     </ul>
     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
       <span class="mdi mdi-menu icon-menu"></span>

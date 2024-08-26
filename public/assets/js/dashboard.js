@@ -42,20 +42,24 @@
             var lineChartCanvas = $("#dashboard-area-chart")
                 .get(0)
                 .getContext("2d");
+            var info = JSON.parse($("#dashboard-data-intents").val());
+            var totalIntents = info.rangetotalIntents;
+            var totalIntentsCompleted = info.rangetotalIntentsDone;
+            var totalIntentsProgress = info.rangetotalIntentsProgress;
             var data = {
-                labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+                labels: totalIntents,
                 datasets: [
                     {
-                        label: "Product",
-                        data: [3, 3, 8, 5, 7, 4, 6, 4, 6, 3],
+                        label: "Mediciones Completas",
+                        data: totalIntentsCompleted,
                         backgroundColor: "#2196f3",
                         borderColor: "#0c83e2",
                         borderWidth: 1,
                         fill: true
                     },
                     {
-                        label: "Product",
-                        data: [7, 5, 14, 7, 12, 6, 10, 6, 11, 5],
+                        label: "Mediciones En Progreso",
+                        data: totalIntentsProgress,
                         backgroundColor: "#19d895",
                         borderColor: "#15b67d",
                         borderWidth: 1,
@@ -457,10 +461,12 @@
             var doughnutChartCanvas = $("#UsersDoughnutChart")
                 .get(0)
                 .getContext("2d");
+            var numAdmin = $("#info-user-admin").val();
+            var numUser = $("#info-user-general").val();
             var doughnutPieData = {
                 datasets: [
                     {
-                        data: [80, 34, 100],
+                        data: [numAdmin, numUser],
                         backgroundColor: [
                             successColor,
                             primaryColor,
@@ -473,7 +479,7 @@
                         ]
                     }
                 ],
-                labels: ["Request", "Email"]
+                labels: ["Administradores", "Usuario General"]
             };
             var doughnutPieOptions = {
                 cutoutPercentage: 70,
@@ -505,25 +511,20 @@
             var barChartCanvas = $("#conversionBarChart")
                 .get(0)
                 .getContext("2d");
+            var informationchart = JSON.parse($("#info-user-organization-size").val());
             var barChart = new Chart(barChartCanvas, {
                 type: "bar",
                 data: {
                     labels: [
-                        "Day 1",
-                        "Day 2",
-                        "Day 3",
-                        "Day 4",
-                        "Day 5",
-                        "Day 6",
-                        "Day 7",
-                        "Day 8",
-                        "Day 9",
-                        "Day 10"
+                        "Menos de 10 Colaboradores",
+                        "Menos de 50 Colaboradores",
+                        "Más de 50 y Menos de 250 Colaboradores",
+                        "Más de 250 Colaboradores",
                     ],
                     datasets: [
                         {
-                            label: "Amount Due",
-                            data: [39, 19, 25, 16, 31, 39, 12, 18, 33, 24],
+                            label: "Usuarios Registrados",
+                            data: informationchart,
                             backgroundColor: primaryColor,
                             borderColor: primaryColor,
                             borderWidth: 0

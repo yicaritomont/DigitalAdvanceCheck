@@ -17,6 +17,7 @@ class Dimension extends Model {
         'min_range',
         'max_range',
         'description',
+        'additional_info',
         'factor_id',
     ];
     public $timestamps = true;

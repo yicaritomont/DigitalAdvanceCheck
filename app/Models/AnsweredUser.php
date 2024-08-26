@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\Attempt;
 
 class AnsweredUser extends Model {
     use HasFactory;
@@ -39,5 +40,11 @@ class AnsweredUser extends Model {
      */
     public function anwser() {
         return $this->belongsTo('App\Models\Answer', 'answer_id');
+    }
+    /**
+     * Include the relation whit model attempt.
+     */
+    public function attempt() {
+        return $this->belongsTo(Attempt::class);
     }
 }

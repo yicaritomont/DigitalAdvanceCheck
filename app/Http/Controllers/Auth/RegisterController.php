@@ -77,6 +77,7 @@ class RegisterController extends Controller {
     }
 
     public function register(Request $request) {
+
         $this->validate($request, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
@@ -95,6 +96,7 @@ class RegisterController extends Controller {
             $user->password              = Hash::make($request['password']);
             $user->rol_id = 2;
             $user->confirmation_code     = $confirmation_code;
+            $user->email_verified_at = now();
             
         if ($user->save()) {
             $datos= array(
@@ -108,16 +110,16 @@ class RegisterController extends Controller {
                 'name'  =>'USUARIO'
             );
             //RegisterController::sendMailRegister($datos,$user,'emails.register');
-           // Sendemail::Send($datos,'emails.register');
+            //Sendemail::Send($datos,'emails.register');
 
-            $mensaje = 'Recibirá en su  correo electronico '.$request['email'].' un enlace para verificar la cuenta.';
+            $mensaje = 'Se ha registrado un nuevo usuario con el correo '.$request['email'].' exitosamente.';
             
         } 
         else 
         {
             $mensaje =  "No se puede registrar";
         } 
-
+    
         return Redirect::to('login/')->with(['message'=> $mensaje,'alert'=> 'info']);
 
     }

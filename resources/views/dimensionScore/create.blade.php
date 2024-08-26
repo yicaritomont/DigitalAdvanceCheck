@@ -17,16 +17,6 @@
 			@csrf
 			<div class="card-body">
 				<div class="form-group">					
-				    <div class="form-group">
-						{{ Form::label('dimension_id', 'Dimension') }}
-						{{ Form::select('dimension_id', $dimension, null , ['class' => '']) }}
-                        @if($errors->has('dimension_id'))
-						<div class="alert alert-danger">
-							{{ $errors->first('dimension_id') }}
-						</div>	
-                        @endif	
-						
-					</div>
 					<div class="form-group">
 						{{ Form::label('madurity_level_id', 'Nivel Madurez') }}
 						{{ Form::select('madurity_level_id', $nivel, null , ['class' => '']) }}

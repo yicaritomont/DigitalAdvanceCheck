@@ -26,6 +26,17 @@ class UserSeeder extends Seeder
                 'confirmation_code' =>  hash('sha256', "administrador@gmail.com"),
                 'rol_id' => 1,
             ],
+            [
+                'name' => 'Usuaurio',
+                'last_name' => 'Prueba',
+                'email' => 'correo@gmail.com',
+                'phone_number' => "3111111111",
+                'size_organization' => "",
+                'name_organization' => "",
+                'password' => bcrypt('123456Abc!'),
+                'confirmation_code' =>  hash('sha256', "correo@gmail.com"),
+                'rol_id' => 2,
+            ],
         ]);
     }
 }

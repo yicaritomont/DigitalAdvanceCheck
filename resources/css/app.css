@@ -4,3 +4,25 @@
     background-color: #252c46 !important;
     border-radius: 0.3rem;
 }
+
+.navbar .navbar-brand-wrapper {
+    transition: width 0.25s ease, background 0.25s ease;
+    -webkit-transition: width 0.25s ease, background 0.25s ease;
+    -moz-transition: width 0.25s ease, background 0.25s ease;
+    -ms-transition: width 0.25s ease, background 0.25s ease;
+    background: #040404 !important;
+    width: 255px;
+    height: 63px;
+}
+
+.navbar .navbar-brand-wrapper .navbar-brand img {
+    /* width: calc(255px - 92px); */
+    /* max-width: 100%; */
+    /* height: 28px; */
+    /* margin: auto; */
+    /* vertical-align: middle; */
+    width: 80% !important;
+    /* height: auto; */
+    margin-top: -2% !important;
+    margin-left: 10% !important;
+}
