@@ -47,7 +47,7 @@
                             <label class="form-check-label">
                             <input type="checkbox" class="form-check-input" checked> Mantener mi sesión </label>
                         </div>
-                        <a href="#" class="text-small forgot-password text-black">Olvidé mi contraseña</a>
+                        <a href="{{ route('password.request') }}" class="text-small forgot-password text-black">Olvidé mi contraseña</a>
                     </div>
                     <div class="text-block text-center my-3">
                         <span class="text-small font-weight-semibold">¿No está registrado?</span>
