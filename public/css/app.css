@@ -19687,3 +19687,36 @@ small {
   height: 100% !important;
   border-radius: 0 !important;
 }
+
+.chart-50 {
+  height: auto !important;
+  width: 100% !important;
+}
+.wrap {
+  width: 100%;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  font-size: 0.875rem;
+  line-height: 1;
+  white-space: normal !important;
+  padding: 12px 15px;
+}
+
+.letter_jumbotrom {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-size: 14px;
+  color:#000 !important;
+}
+.cardGray {
+  background-color: #e9ecef !important;
+}
+.resaltar {
+  font-size: 32px;
+}

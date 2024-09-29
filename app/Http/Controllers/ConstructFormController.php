@@ -227,12 +227,45 @@ class ConstructFormController extends Controller
         $attemps = Attempt::where('user_id', Auth::user()->id)->where('completed',1)->get();
         
         // Por intento terminado, consulte las respuestas dadas por el usuario y obtenga el points... VAYA SUMANDO! 
-        $results = [];
+        $results = $dataGraph = $dataLevelGraph = $dimensionBy = [];
+        $i = 0;
+        $colores = [
+            ['rgba(255, 99, 132, 0.2)', 'rgb(255, 99, 132)'],   // Rojo
+            ['rgba(54, 162, 235, 0.2)', 'rgb(54, 162, 235)'],   // Azul
+            ['rgba(75, 192, 192, 0.2)', 'rgb(75, 192, 192)'],   // Verde
+            ['rgba(255, 206, 86, 0.2)', 'rgb(255, 206, 86)'],   // Amarillo
+            ['rgba(153, 102, 255, 0.2)', 'rgb(153, 102, 255)'], // Púrpura
+            ['rgba(255, 159, 64, 0.2)', 'rgb(255, 159, 64)'],   // Naranja
+        ];
         foreach ($attemps as $attemp) {
             $score = 0;
             $answers = AnsweredUser::where('user_id', Auth::user()->id)->where('attemp_id',$attemp->id)->get();
-            
+            $dimmensioninfoTanslate = DB::table('attemps as a')
+                    ->join('answered_user as b', 'a.id', '=', 'b.attemp_id')
+                    ->join('answer as c', 'b.answer_id', '=', 'c.id')
+                    ->join('question as d', 'c.question_id', '=', 'd.id')
+                    ->join('form as e', 'd.form_id', '=', 'e.id')
+                    ->join('dimension as f', 'e.dimension_id', '=', 'f.id')
+                    ->select(DB::raw('SUM(c.points) as total_points'))
+                    ->where('a.user_id', $attemp->user_id)
+                    ->where('a.completed', 1)
+                    ->where('a.id', $attemp->id)
+                    ->groupBy('a.id', 'f.id')
+                    ->get()->toArray();
+            $dimensionInfo = [];
+            foreach ($dimmensioninfoTanslate as $dimension) {
+                array_push($dimensionInfo,$dimension->total_points);
+            }
            
+            $dimensionBy[$attemp->id]['label'] = $dataLevelGraph[$i]['label'] = $dataGraph[$i]['label'] = 'Intento #' . $attemp->attemp_number;
+            $dimensionBy[$attemp->id]['fill'] = $dataLevelGraph[$i]['fill'] = $dataGraph[$i]['fill'] = true;
+            $dimensionBy[$attemp->id]['backgroundColor'] = $dataLevelGraph[$i]['backgroundColor'] = $dataGraph[$i]['backgroundColor']= $colores[$i][0];
+            $dimensionBy[$attemp->id]['borderColor'] = $dataLevelGraph[$i]['borderColor'] = $dataGraph[$i]['borderColor']= $colores[$i][1];
+            $dimensionBy[$attemp->id]['pointBackgroundColor'] = $dataLevelGraph[$i]['pointBackgroundColor'] = $dataGraph[$i]['pointBackgroundColor']= $colores[$i][1];
+            $dimensionBy[$attemp->id]['pointBorderColor'] = $dataLevelGraph[$i]['pointBorderColor'] = $dataGraph[$i]['pointBorderColor']= '#fff';
+            $dimensionBy[$attemp->id]['pointHoverBackgroundColor'] = $dataLevelGraph[$i]['pointHoverBackgroundColor'] = $dataGraph[$i]['pointHoverBackgroundColor']= '#fff';
+            $dimensionBy[$attemp->id]['pointHoverBorderColor'] = $dataLevelGraph[$i]['pointHoverBorderColor'] = $dataGraph[$i]['pointHoverBorderColor']= $colores[$i][1];
+            $dataGraph[$i]['data']= $dimensionInfo;
             foreach ($answers as $answer) {
                 $score+= $answer->anwser->points;
                 $dimensionScore = DB::table('attemps as a')
@@ -247,19 +280,44 @@ class ConstructFormController extends Controller
                     ->where('a.id', $attemp->id)
                     ->groupBy('a.id', 'f.id')
                     ->get()->toArray();
+                    
+                $dimensionInfogrph = [];
+                foreach ($dimmensioninfoTanslate as $dimensiong) {
+                    array_push($dimensionInfogrph,$dimensiong->total_points);
+                }
+                   
+                $dimensionBy[$attemp->id]['data'] = $dimensionInfogrph;
             }
+            $result_levels = MadurityLevel::where('status', '=', '1')->pluck('visible_name')->toArray();
+            
             $level = MadurityLevel::where('min_range', '<=', $score)
-                ->where('max_range', '>=', $score)
-                ->first();
+            ->where('max_range', '>=', $score)
+            ->first();
+
+            $dataLevelGraph[$i]['data']= $this->generateArray($result_levels, $level->visible_name);
+
             $result[$attemp->id] = [
+                'attempt' => $attemp->id,
                 'TotalScore' => $score,
                 'DimensionScore' => $dimensionScore,
                 'Level' => $level,
+                'DimensionsGraph' => [$dimensionBy[$attemp->id]]
             ];
+            $dimensions = Dimension::where('status', '=', '1')->pluck('name')->toArray();
+ 
+            
+            $i++;
         }
-        return view("medition.show", compact('result'));
+        return view("medition.show", compact('result', 'dimensions', 'dataGraph','dataLevelGraph','result_levels'));
     }
 
+    // Función que crea el nuevo arreglo binario
+    public function generateArray($modelo, $variable) {
+        // Recorremos el arreglo modelo y comparamos
+        return array_map(function($item) use ($variable) {
+            return $item === $variable ? 5 : 0;
+        }, $modelo);
+    }
     /**
      * Function to construct the recomendations information. 
      */
@@ -280,6 +338,7 @@ class ConstructFormController extends Controller
                 ->first();
             $recomendations = DimensionPoint::where('madurity_level_id',$level->id)->first();
             $result[$attemp->id] = [
+                'attemp' => $attemp->id,
                 'TotalScore' => $score,
                 'Level' => $level,
                 'Recomendations' => $recomendations,
@@ -291,10 +350,26 @@ class ConstructFormController extends Controller
 
     public function showResume($attemp_id){
         $attemps = Attempt::where('id',$attemp_id)->first();
-        
+        $colores = [
+            ['rgba(255, 99, 132, 0.2)', 'rgb(255, 99, 132)'],   // Rojo
+            ['rgba(54, 162, 235, 0.2)', 'rgb(54, 162, 235)'],   // Azul
+            ['rgba(75, 192, 192, 0.2)', 'rgb(75, 192, 192)'],   // Verde
+            ['rgba(255, 206, 86, 0.2)', 'rgb(255, 206, 86)'],   // Amarillo
+            ['rgba(153, 102, 255, 0.2)', 'rgb(153, 102, 255)'], // Púrpura
+            ['rgba(255, 159, 64, 0.2)', 'rgb(255, 159, 64)'],   // Naranja
+        ];
         // Por intento terminado, consulte las respuestas dadas por el usuario y obtenga el points... VAYA SUMANDO! 
-        $results = [];
+            $results = $dimensionBy = [];
             $score = 0;
+            $dimensionBy[$attemp_id]['label']= 'Intento #' . $attemps->attemp_number;
+            $dimensionBy[$attemp_id]['fill']  = true;
+            $dimensionBy[$attemp_id]['backgroundColor'] = $colores[ rand(0, 5)][0];
+            $dimensionBy[$attemp_id]['borderColor'] = $colores[ rand(0, 5)][1];
+            $dimensionBy[$attemp_id]['pointBackgroundColor'] = $colores[ rand(0, 5)][1];
+            $dimensionBy[$attemp_id]['pointBorderColor'] = '#fff';
+            $dimensionBy[$attemp_id]['pointHoverBackgroundColor']= '#fff';
+            $dimensionBy[$attemp_id]['pointHoverBorderColor'] = $colores[ rand(0, 5)][1];
+
             $answers = AnsweredUser::where('attemp_id',$attemp_id)->get();
             foreach ($answers as $answer) {
                 $score+= $answer->anwser->points;
@@ -310,6 +385,12 @@ class ConstructFormController extends Controller
                     ->where('a.id', $attemp_id)
                     ->groupBy('a.id', 'f.id')
                     ->get()->toArray();
+                    $dimensionInfogrph = [];
+                    foreach ($dimensionScore as $dimensiong) {
+                        array_push($dimensionInfogrph,$dimensiong->total_points);
+                    }
+                       
+                    $dimensionBy[$attemp_id]['data'] = $dimensionInfogrph;
             }
             $level = MadurityLevel::where('min_range', '<=', $score)
                 ->where('max_range', '>=', $score)
@@ -321,9 +402,11 @@ class ConstructFormController extends Controller
                 'Level' => $level,
                 'Recomendations' => $recomendations,
                 'Info' => $attemps->user,
+                'Attemp' => $attemps,
+                'DimensionsGraph' => [$dimensionBy[$attemp_id]]
             ];
-
-        return view("medition.resume", compact('result'));
+            $dimensions = Dimension::where('status', '=', '1')->pluck('name')->toArray();
+        return view("medition.resume", compact('result', 'dimensions'));
     }
 
 

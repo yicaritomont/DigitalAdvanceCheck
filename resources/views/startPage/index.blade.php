@@ -53,7 +53,8 @@
           <div class="container">
             <h1 class="display-4 text-blue text-center text-white"><b>¿Porqué es importante conocer el nivel de madurez digital?</b></h1>
             <hr>
-            <p class="lead text-center text-white"><i>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</i></p>
+            <p class="lead text-center text-white"><i>Conocer el nivel de madurez digital de una organización es fundamental para comprender su capacidad de aprovechar las tecnologías emergentes en sus procesos y estrategias. La transformación digital no solo se trata de implementar nuevas herramientas, sino de integrar profundamente estas tecnologías en la cultura, operaciones y toma de decisiones. Evaluar el nivel de madurez digital permite identificar áreas de mejora, definir estrategias concretas y establecer un camino claro hacia la innovación y competitividad en un entorno cada vez más digitalizado. Una organización con un alto nivel de madurez digital está mejor preparada para adaptarse a los cambios del mercado y aprovechar las oportunidades tecnológicas.</i></p>
+            <p class="lead text-center text-white"><i>La medición del nivel de madurez digital ofrece una visión clara de las fortalezas y debilidades actuales en términos de infraestructura tecnológica, habilidades del personal, y procesos automatizados. Esto permite a las organizaciones tomar decisiones más informadas, alinear sus inversiones tecnológicas con sus objetivos estratégicos y mantenerse competitivas en su industria. En conclusión, conocer este nivel es esencial para guiar a las organizaciones en su evolución digital, maximizando su potencial y garantizando una implementación efectiva de la tecnología que impulse su crecimiento sostenible.</i></p>
           </div>
         </div>
       </div>
@@ -74,28 +75,28 @@
               </ol>
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_1.jpg') }}" alt="First slide">
+                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_1.jpeg') }}" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_2.jpg') }}" alt="Second slide">
+                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_2.jpeg') }}" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_3.jpg') }}" alt="Third slide">
+                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_3.jpeg') }}" alt="Third slide">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_4.jpg') }}" alt="Third slide">
+                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_4.jpeg') }}" alt="Third slide">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_5.jpg') }}" alt="Third slide">
+                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_5.jpeg') }}" alt="Third slide">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_6.jpg') }}" alt="Third slide">
+                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_6.jpeg') }}" alt="Third slide">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_7.jpg') }}" alt="Third slide">
+                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_7.jpeg') }}" alt="Third slide">
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_8.jpg') }}" alt="Third slide">
+                  <img class="d-block" src="{{ asset('assets/images/carousel/banner_8.jpeg') }}" alt="Third slide">
                 </div>
               </div>
               <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
